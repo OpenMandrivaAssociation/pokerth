@@ -8,6 +8,7 @@ Summary: PokerTH - play Texas Holdem Poker alone or online
 Version: %{version}
 Release: %{release}
 License: GPL
+#v2
 Group: Games/Cards
 URL: http://www.pokerth.net/
 Source: http://downloads.sourceforge.net/%{name}/%{oname}-%{version}-src.tar.bz2
@@ -55,6 +56,9 @@ make -f Makefile_game install INSTALL_ROOT=%{buildroot}
 install -d -m 755 %{buildroot}%{_bindir}
 install -m 755 %{name} %{buildroot}%{_bindir}/
 install -m 755 bin/%{name}_server %{buildroot}%{_bindir}/
+#man page
+install -d -m 755 %{buildroot}%{_mandir}/1
+install -m 644 docs/%{name}.1 %{buildroot}%{_mandir}/1/
 #icon
 install -d -m 755 %{buildroot}%{_iconsdir}
 install -m 644 %{name}.png %{buildroot}%{_iconsdir}/%{name}.png
@@ -94,15 +98,16 @@ rm -rf %{buildroot}
 
 %files
 %defattr(0755,root,root,0644)
-%doc ChangeLog
+%doc ChangeLog COPYING docs/net_protocol.txt
 %attr(0755,root,root) %{_bindir}/%{name}
+%{_mandir}/1/%{name}.1*
 %{_datadir}/%{name}
+%{_datadir}/applications/%{name}.desktop
 %{_iconsdir}/%{name}.png
 %{_menudir}/%{name}
-%{_datadir}/applications/%{name}.desktop
 
 %files -n %{name}-server
 %defattr(0755,root,root,0644)
-%doc ChangeLog
+%doc ChangeLog COPYING docs/net_protocol.txt
 %attr(0755,root,root) %{_bindir}/%{name}_server
 
