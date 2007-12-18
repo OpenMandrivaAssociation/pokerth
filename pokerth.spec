@@ -13,6 +13,7 @@ Group: Games/Cards
 URL: http://www.pokerth.net/
 Source: http://downloads.sourceforge.net/%{name}/%{oname}-%{version}-src.tar.bz2
 BuildRequires: qt4-devel
+BuildRequires: openssl-devel
 BuildRequires: boost-devel
 BuildRequires: SDL_mixer1.2-devel
 BuildRequires: desktop-file-utils
