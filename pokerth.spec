@@ -1,7 +1,7 @@
 %define name pokerth
 %define oname PokerTH
 %define version 0.6
-%define release %mkrel 1
+%define release %mkrel 2
 
 Name: %{name}
 Summary: PokerTH - play Texas Holdem Poker alone or online
@@ -12,6 +12,7 @@ License: GPL
 Group: Games/Cards
 URL: http://www.pokerth.net/
 Source: http://downloads.sourceforge.net/%{name}/%{oname}-%{version}-src.tar.bz2
+Patch0: %{name}-0.6-open-license-readonly.patch
 BuildRequires: qt4-devel
 BuildRequires: openssl-devel
 BuildRequires: boost-devel
@@ -36,9 +37,9 @@ PokerTH server.
 
 %prep
 %setup -n %{oname}-%{version} -q
+%patch0 -p0
 perl -pi -e "s|.png||" %{name}.desktop
 perl -pi -e "s|\r\n|\n|" ChangeLog
-#chmod 644 ChangeLog
 
 %build
 export QTDIR=/usr/lib/qt4
@@ -98,8 +99,8 @@ desktop-file-install --vendor="" \
 rm -rf %{buildroot}
 
 %files
-%defattr(0755,root,root,0644)
-%doc ChangeLog COPYING docs/net_protocol.txt
+%defattr(0644,root,root,0755)
+%doc ChangeLog docs/net_protocol.txt
 %attr(0755,root,root) %{_bindir}/%{name}
 %{_mandir}/1/%{name}.1*
 %{_datadir}/%{name}
@@ -108,7 +109,7 @@ rm -rf %{buildroot}
 %{_menudir}/%{name}
 
 %files -n %{name}-server
-%defattr(0755,root,root,0644)
+%defattr(0644,root,root,0755)
 %doc ChangeLog COPYING docs/net_protocol.txt
 %attr(0755,root,root) %{_bindir}/%{name}_server
 
