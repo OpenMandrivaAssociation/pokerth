@@ -68,17 +68,6 @@ install -m 644 %{name}.png %{buildroot}%{_iconsdir}/%{name}.png
 install -d -m 755 %{buildroot}%{_datadir}/applications/
 install -m 644 %{name}.desktop %{buildroot}%{_datadir}/applications/
 
-mkdir -p %{buildroot}%{_menudir}
-cat > %{buildroot}%{_menudir}/%{name} <<EOF
-?package(%{name}): \
-command="%{name}" \
-title="%{oname}" \
-longtitle="%summary" \
-icon="%{name}.png" \
-needs="x11" \
-section="More Applications/Games/Cards" \
-xdg="true"
-EOF
 
 mkdir -p %{buildroot}%{_datadir}/applications/
 desktop-file-install --vendor="" \
@@ -106,7 +95,6 @@ rm -rf %{buildroot}
 %{_datadir}/%{name}
 %{_datadir}/applications/%{name}.desktop
 %{_iconsdir}/%{name}.png
-%{_menudir}/%{name}
 
 %files -n %{name}-server
 %defattr(0644,root,root,0755)
