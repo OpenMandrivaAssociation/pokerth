@@ -1,7 +1,7 @@
 %define name pokerth
 %define oname PokerTH
-%define version 0.6
-%define release %mkrel 2
+%define version 0.6.1
+%define release %mkrel 1
 
 Name: %{name}
 Summary: PokerTH - play Texas Holdem Poker alone or online
@@ -11,8 +11,7 @@ License: GPL
 #v2
 Group: Games/Cards
 URL: http://www.pokerth.net/
-Source: http://downloads.sourceforge.net/%{name}/%{oname}-%{version}-src.tar.bz2
-Patch0: %{name}-0.6-open-license-readonly.patch
+Source: http://downloads.sourceforge.net/%{name}/%{oname}-%{version}.src.tar.bz2
 BuildRequires: qt4-devel
 BuildRequires: openssl-devel
 BuildRequires: boost-devel
@@ -36,8 +35,7 @@ six computer-opponents or play network games with people all over the world.
 PokerTH server.
 
 %prep
-%setup -n %{oname}-%{version} -q
-%patch0 -p0
+%setup -n %{oname}-%{version}-src -q
 perl -pi -e "s|.png||" %{name}.desktop
 perl -pi -e "s|\r\n|\n|" ChangeLog
 
@@ -93,6 +91,7 @@ rm -rf %{buildroot}
 %attr(0755,root,root) %{_bindir}/%{name}
 %{_mandir}/1/%{name}.1*
 %{_datadir}/%{name}
+%{_datadir}/pixmaps/%{name}.png
 %{_datadir}/applications/%{name}.desktop
 %{_iconsdir}/%{name}.png
 
