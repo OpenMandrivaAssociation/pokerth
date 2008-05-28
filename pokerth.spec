@@ -1,25 +1,21 @@
-%define name pokerth
-%define oname PokerTH
-%define version 0.6.1
-%define release %mkrel 1
-
-Name: %{name}
+Name: pokerth
 Summary: PokerTH - play Texas Holdem Poker alone or online
-Version: %{version}
-Release: %{release}
-License: GPL
+Version: 0.6.2
+Release: %mkrel 1
+License: GPLv2+
 #v2
 Group: Games/Cards
 URL: http://www.pokerth.net/
-Source: http://downloads.sourceforge.net/%{name}/%{oname}-%{version}.src.tar.bz2
+Source: http://downloads.sourceforge.net/pokerth/PokerTH-%{version}-src.tar.bz2
+BuildRequires: chrpath
 BuildRequires: qt4-devel
-BuildRequires: openssl-devel
+BuildRequires: gnutls-devel
 BuildRequires: boost-devel
 BuildRequires: SDL_mixer1.2-devel
 BuildRequires: desktop-file-utils
-%if %mdkversion < 200800
-BuildRoot: %{_tmppath}/%{name}-%{version}-buildroot
-%endif
+Requires(post): desktop-file-utils
+Requires(postun): desktop-file-utils
+BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root
 
 %package -n %{name}-server
 Summary: PokerTH server
@@ -35,9 +31,9 @@ six computer-opponents or play network games with people all over the world.
 PokerTH server.
 
 %prep
-%setup -n %{oname}-%{version}-src -q
+%setup -q -n PokerTH-%{version}-src
 perl -pi -e "s|.png||" %{name}.desktop
-perl -pi -e "s|\r\n|\n|" ChangeLog
+perl -pi -e "s|\r\n|\n|" ChangeLog docs/net_protocol.txt
 
 %build
 export QTDIR=/usr/lib/qt4
@@ -57,8 +53,8 @@ install -d -m 755 %{buildroot}%{_bindir}
 install -m 755 %{name} %{buildroot}%{_bindir}/
 install -m 755 bin/%{name}_server %{buildroot}%{_bindir}/
 #man page
-install -d -m 755 %{buildroot}%{_mandir}/1
-install -m 644 docs/%{name}.1 %{buildroot}%{_mandir}/1/
+install -d -m 755 %{buildroot}%{_mandir}/man1
+install -m 644 docs/%{name}.1 %{buildroot}%{_mandir}/man1/
 #icon
 install -d -m 755 %{buildroot}%{_iconsdir}
 install -m 644 %{name}.png %{buildroot}%{_iconsdir}/%{name}.png
@@ -76,10 +72,15 @@ desktop-file-install --vendor="" \
   --dir %{buildroot}%{_datadir}/applications/ \
   %{buildroot}%{_datadir}/applications/*
 
+%{_bindir}/chrpath -d %{buildroot}%{_bindir}/%{name}
+%{_bindir}/chrpath -d %{buildroot}%{_bindir}/%{name}_server
+
 %post
+%{update_desktop_database}
 %{update_menus}
  
 %postun
+%{clean_desktop_database}
 %{clean_menus} 
 
 %clean
@@ -89,7 +90,7 @@ rm -rf %{buildroot}
 %defattr(0644,root,root,0755)
 %doc ChangeLog docs/net_protocol.txt
 %attr(0755,root,root) %{_bindir}/%{name}
-%{_mandir}/1/%{name}.1*
+%{_mandir}/man1/%{name}.1*
 %{_datadir}/%{name}
 %{_datadir}/pixmaps/%{name}.png
 %{_datadir}/applications/%{name}.desktop
@@ -99,4 +100,3 @@ rm -rf %{buildroot}
 %defattr(0644,root,root,0755)
 %doc ChangeLog COPYING docs/net_protocol.txt
 %attr(0755,root,root) %{_bindir}/%{name}_server
-
