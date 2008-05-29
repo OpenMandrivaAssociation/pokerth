@@ -3,31 +3,31 @@ Summary: PokerTH - play Texas Holdem Poker alone or online
 Version: 0.6.2
 Release: %mkrel 1
 License: GPLv2+
-#v2
 Group: Games/Cards
 URL: http://www.pokerth.net/
-Source: http://downloads.sourceforge.net/pokerth/PokerTH-%{version}-src.tar.bz2
+Source0: http://downloads.sourceforge.net/pokerth/PokerTH-%{version}-src.tar.bz2
+Requires(post): desktop-file-utils
+Requires(postun): desktop-file-utils
 BuildRequires: chrpath
 BuildRequires: qt4-devel
 BuildRequires: gnutls-devel
 BuildRequires: boost-devel
+BuildRequires: curl-devel
 BuildRequires: SDL_mixer1.2-devel
 BuildRequires: desktop-file-utils
-Requires(post): desktop-file-utils
-Requires(postun): desktop-file-utils
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root
-
-%package -n %{name}-server
-Summary: PokerTH server
-License: GPL
-Group: Games/Cards
 
 %description
 PokerTH is a multi-platform poker game.
 It allows you to play the popular "Texas Hold'em" poker variant against up to 
 six computer-opponents or play network games with people all over the world.
 
-%description -n %{name}-server
+%package server
+Summary: PokerTH server
+License: GPL
+Group: Games/Cards
+
+%description server
 PokerTH server.
 
 %prep
@@ -96,7 +96,7 @@ rm -rf %{buildroot}
 %{_datadir}/applications/%{name}.desktop
 %{_iconsdir}/%{name}.png
 
-%files -n %{name}-server
+%files server
 %defattr(0644,root,root,0755)
 %doc ChangeLog COPYING docs/net_protocol.txt
 %attr(0755,root,root) %{_bindir}/%{name}_server
