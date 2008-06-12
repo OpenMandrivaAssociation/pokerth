@@ -75,13 +75,17 @@ desktop-file-install --vendor="" \
 %{_bindir}/chrpath -d %{buildroot}%{_bindir}/%{name}
 %{_bindir}/chrpath -d %{buildroot}%{_bindir}/%{name}_server
 
+%if %mdkversion < 200900
 %post
 %{update_desktop_database}
 %{update_menus}
+%endif
  
+%if %mdkversion < 200900
 %postun
 %{clean_desktop_database}
 %{clean_menus} 
+%endif
 
 %clean
 rm -rf %{buildroot}
