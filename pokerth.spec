@@ -1,7 +1,7 @@
 Name: pokerth
 Summary: PokerTH - play Texas Holdem Poker alone or online
 Version: 0.6.2
-Release: %mkrel 2
+Release: %mkrel 3
 License: GPLv2+
 Group: Games/Cards
 URL: http://www.pokerth.net/
@@ -24,7 +24,6 @@ six computer-opponents or play network games with people all over the world.
 
 %package server
 Summary: PokerTH server
-License: GPL
 Group: Games/Cards
 
 %description server
@@ -41,6 +40,8 @@ export QTDIR=%{qt4dir}
 %make -f Makefile_lib
 %qmake_qt4 pokerth_game.pro -o Makefile_game
 %make -f Makefile_game
+
+%serverbuild
 %qmake_qt4 pokerth_server.pro -o Makefile_server
 %make -f Makefile_server
 
