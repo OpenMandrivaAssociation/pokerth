@@ -36,7 +36,7 @@ perl -pi -e "s|.png||" %{name}.desktop
 perl -pi -e "s|\r\n|\n|" ChangeLog docs/net_protocol.txt
 
 %build
-export QTDIR=/usr/lib/qt4
+export QTDIR=%{qt4dir}
 %qmake_qt4 pokerth_lib.pro -o Makefile_lib
 %make -f Makefile_lib
 %qmake_qt4 pokerth_game.pro -o Makefile_game
