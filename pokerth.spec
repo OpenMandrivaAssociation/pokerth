@@ -1,11 +1,11 @@
 Name: pokerth
 Summary: PokerTH - play Texas Holdem Poker alone or online
-Version: 0.6.2
-Release: %mkrel 6
+Version: 0.6.3
+Release: %mkrel 1
 License: GPLv2+
 Group: Games/Cards
 URL: http://www.pokerth.net/
-Source0: http://downloads.sourceforge.net/pokerth/PokerTH-%{version}-src.tar.bz2
+Source0: http://downloads.sourceforge.net/pokerth/PokerTH-%{version}-2-src.tar.bz2
 Requires(post): desktop-file-utils
 Requires(postun): desktop-file-utils
 BuildRequires: chrpath
