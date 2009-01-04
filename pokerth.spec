@@ -30,7 +30,7 @@ Group: Games/Cards
 PokerTH server.
 
 %prep
-%setup -q -n PokerTH-%{version}-src
+%setup -q -n PokerTH-%{version}-2-src
 perl -pi -e "s|.png||" %{name}.desktop
 perl -pi -e "s|\r\n|\n|" ChangeLog docs/net_protocol.txt
 
