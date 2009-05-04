@@ -1,11 +1,11 @@
 Name: pokerth
 Summary: PokerTH - play Texas Holdem Poker alone or online
-Version: 0.6.3
-Release: %mkrel 2
+Version: 0.7
+Release: %mkrel 1
 License: GPLv2+
 Group: Games/Cards
 URL: http://www.pokerth.net/
-Source0: http://downloads.sourceforge.net/pokerth/PokerTH-%{version}-2-src.tar.bz2
+Source0: http://downloads.sourceforge.net/pokerth/PokerTH-%{version}-src.tar.bz2
 Requires(post): desktop-file-utils
 Requires(postun): desktop-file-utils
 BuildRequires: chrpath
@@ -14,7 +14,6 @@ BuildRequires: gnutls-devel
 BuildRequires: boost-devel
 BuildRequires: curl-devel
 BuildRequires: SDL_mixer1.2-devel
-BuildRequires: desktop-file-utils
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root
 
 %description
@@ -30,12 +29,9 @@ Group: Games/Cards
 PokerTH server.
 
 %prep
-%setup -q -n PokerTH-%{version}-2-src
-perl -pi -e "s|.png||" %{name}.desktop
-perl -pi -e "s|\r\n|\n|" ChangeLog docs/net_protocol.txt
+%setup -q -n PokerTH-%{version}-src
 
 %build
-export QTDIR=%{qt4dir}
 %qmake_qt4 pokerth_lib.pro -o Makefile_lib
 %make -f Makefile_lib
 %qmake_qt4 pokerth_game.pro -o Makefile_game
@@ -62,16 +58,6 @@ install -m 644 %{name}.png %{buildroot}%{_iconsdir}/%{name}.png
 #menu
 install -d -m 755 %{buildroot}%{_datadir}/applications/
 install -m 644 %{name}.desktop %{buildroot}%{_datadir}/applications/
-
-
-mkdir -p %{buildroot}%{_datadir}/applications/
-desktop-file-install --vendor="" \
-  --remove-key="Version" \
-  --remove-category="Application" \
-  --add-category="Qt" \
-  --add-category="X-MandrivaLinux-MoreApplications-Games-Cards" \
-  --dir %{buildroot}%{_datadir}/applications/ \
-  %{buildroot}%{_datadir}/applications/*
 
 %{_bindir}/chrpath -d %{buildroot}%{_bindir}/%{name}
 %{_bindir}/chrpath -d %{buildroot}%{_bindir}/%{name}_server
