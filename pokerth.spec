@@ -1,19 +1,20 @@
 Name: pokerth
 Summary: PokerTH - play Texas Holdem Poker alone or online
-Version: 0.7.1
-Release: %mkrel 4
+Version: 0.8
+Release: %mkrel 1
 License: GPLv2+
 Group: Games/Cards
 URL: http://www.pokerth.net/
 Source0: http://downloads.sourceforge.net/pokerth/PokerTH-%{version}-src.tar.bz2
 Requires(post): desktop-file-utils
 Requires(postun): desktop-file-utils
-BuildRequires: chrpath
+#BuildRequires: chrpath
 BuildRequires: qt4-devel
 BuildRequires: gnutls-devel
 BuildRequires: boost-devel
 BuildRequires: curl-devel
 BuildRequires: SDL_mixer1.2-devel
+BuildRequires: libgsasl-devel  
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root
 
 %description
@@ -32,19 +33,15 @@ PokerTH server.
 %setup -q -n PokerTH-%{version}-src
 
 %build
-%qmake_qt4 pokerth_lib.pro -o Makefile_lib
-%make -f Makefile_lib
-%qmake_qt4 pokerth_game.pro -o Makefile_game
-%make -f Makefile_game
+%qmake_qt4 pokerth.pro 
+%make
 
-%serverbuild
-%qmake_qt4 pokerth_server.pro -o Makefile_server
-%make -f Makefile_server
+
 
 %install
-rm -rf %{buildroot}
+%__rm -rf %{buildroot}
 #data
-make -f Makefile_game install INSTALL_ROOT=%{buildroot}
+%make INSTALL_ROOT=%{buildroot} install
 #binaries
 install -d -m 755 %{buildroot}%{_bindir}
 install -m 755 %{name} %{buildroot}%{_bindir}/
@@ -58,9 +55,6 @@ install -m 644 %{name}.png %{buildroot}%{_iconsdir}/%{name}.png
 #menu
 install -d -m 755 %{buildroot}%{_datadir}/applications/
 install -m 644 %{name}.desktop %{buildroot}%{_datadir}/applications/
-
-%{_bindir}/chrpath -d %{buildroot}%{_bindir}/%{name}
-%{_bindir}/chrpath -d %{buildroot}%{_bindir}/%{name}_server
 
 %if %mdkversion < 200900
 %post
