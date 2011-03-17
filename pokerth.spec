@@ -32,10 +32,8 @@ PokerTH server.
 %setup -q -n PokerTH-%{version}-src
 
 %build
-%qmake_qt4 pokerth.pro 
+%qmake_qt4 pokerth.pro QMAKE_CXXFLAGS="%optflags -DBOOST_FILESYSTEM_VERSION=2"
 %make
-
-
 
 %install
 %__rm -rf %{buildroot}
