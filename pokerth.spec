@@ -1,29 +1,31 @@
-Name: pokerth
-Summary: PokerTH - play Texas Holdem Poker alone or online
-Version: 0.8.3
-Release: %mkrel 3
-License: GPLv2+
-Group: Games/Cards
-URL: http://www.pokerth.net/
-Source0: http://downloads.sourceforge.net/pokerth/PokerTH-%{version}-src.tar.bz2
-Requires(post): desktop-file-utils
+Name:		pokerth
+Summary:	PokerTH - play Texas Holdem Poker alone or online
+Version:	0.9
+Release:	%mkrel 1
+License:	GPLv2+
+Group:		Games/Cards
+URL:		http://www.pokerth.net/
+Source0:	http://downloads.sourceforge.net/pokerth/PokerTH-%{version}-src.tar.bz2
+Requires(post):	desktop-file-utils
 Requires(postun): desktop-file-utils
-BuildRequires: qt4-devel
-BuildRequires: gnutls-devel
-BuildRequires: boost-devel
-BuildRequires: curl-devel
-BuildRequires: SDL_mixer1.2-devel
-BuildRequires: libgsasl-devel  
-BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root
+BuildRequires:	qt4-devel
+BuildRequires:	gnutls-devel
+BuildRequires:	boost-devel
+BuildRequires:	curl-devel
+BuildRequires:	SDL_mixer-devel
+BuildRequires:	libgsasl-devel
+BuildRequires:	tinyxml-devel
+BuildRequires:	libircclient-static-devel
+BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root
 
 %description
 PokerTH is a multi-platform poker game.
 It allows you to play the popular "Texas Hold'em" poker variant against up to 
 six computer-opponents or play network games with people all over the world.
 
-%package server
-Summary: PokerTH server
-Group: Games/Cards
+%package	server
+Summary:	PokerTH server
+Group:		Games/Cards
 
 %description server
 PokerTH server.
@@ -32,7 +34,7 @@ PokerTH server.
 %setup -q -n PokerTH-%{version}-src
 
 %build
-%qmake_qt4 pokerth.pro QMAKE_CXXFLAGS="%optflags -DBOOST_FILESYSTEM_VERSION=2"
+%qmake_qt4 pokerth.pro QMAKE_CXXFLAGS="%{optflags} -DBOOST_FILESYSTEM_VERSION=2"
 %make
 
 %install
@@ -53,24 +55,12 @@ install -m 644 %{name}.png %{buildroot}%{_iconsdir}/%{name}.png
 install -d -m 755 %{buildroot}%{_datadir}/applications/
 install -m 644 %{name}.desktop %{buildroot}%{_datadir}/applications/
 
-%if %mdkversion < 200900
-%post
-%{update_desktop_database}
-%{update_menus}
-%endif
- 
-%if %mdkversion < 200900
-%postun
-%{clean_desktop_database}
-%{clean_menus} 
-%endif
-
 %clean
-rm -rf %{buildroot}
+%__rm -rf %{buildroot}
 
 %files
 %defattr(0644,root,root,0755)
-%doc ChangeLog docs/net_protocol.txt
+%doc ChangeLog docs/gui_styling_howto.txt
 %attr(0755,root,root) %{_bindir}/%{name}
 %{_mandir}/man1/%{name}.1*
 %{_datadir}/%{name}
@@ -80,5 +70,5 @@ rm -rf %{buildroot}
 
 %files server
 %defattr(0644,root,root,0755)
-%doc ChangeLog COPYING docs/net_protocol.txt
+%doc ChangeLog COPYING docs/server_setup_howto.txt
 %attr(0755,root,root) %{_bindir}/%{name}_server
