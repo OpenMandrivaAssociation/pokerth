@@ -1,6 +1,6 @@
 Name:		pokerth
 Summary:	PokerTH - play Texas Holdem Poker alone or online
-Version:	0.9
+Version:	0.9.1
 Release:	%mkrel 1
 License:	GPLv2+
 Group:		Games/Cards
@@ -10,13 +10,13 @@ Requires(post):	desktop-file-utils
 Requires(postun): desktop-file-utils
 BuildRequires:	qt4-devel
 BuildRequires:	gnutls-devel
+# Boost version in 2010.2 is too old so no backport to 2010.2
 BuildRequires:	boost-devel
 BuildRequires:	curl-devel
 BuildRequires:	SDL_mixer-devel
 BuildRequires:	libgsasl-devel
 BuildRequires:	tinyxml-devel
 BuildRequires:	libircclient-static-devel
-BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root
 
 %description
 PokerTH is a multi-platform poker game.
