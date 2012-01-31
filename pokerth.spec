@@ -6,6 +6,7 @@ License:	GPLv2+
 Group:		Games/Cards
 URL:		http://www.pokerth.net/
 Source0:	http://downloads.sourceforge.net/pokerth/PokerTH-%{version}-src.tar.bz2
+Patch0:		PokerTH-0.9.1-libircclient-dir.patch
 Requires(post):	desktop-file-utils
 Requires(postun): desktop-file-utils
 BuildRequires:	qt4-devel
@@ -32,6 +33,7 @@ PokerTH server.
 
 %prep
 %setup -q -n PokerTH-%{version}-src
+%patch0 -p0
 
 %build
 %qmake_qt4 pokerth.pro QMAKE_CXXFLAGS="%{optflags} -DBOOST_FILESYSTEM_VERSION=2"
