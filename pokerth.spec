@@ -38,7 +38,7 @@ PokerTH server.
 %patch1 -p0
 
 %build
-%qmake_qt4 pokerth.pro QMAKE_CXXFLAGS="%{optflags} -DBOOST_FILESYSTEM_VERSION=2"
+%qmake_qt4 pokerth.pro 
 %make
 
 %install
