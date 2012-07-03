@@ -19,6 +19,7 @@ BuildRequires:	SDL_mixer-devel
 BuildRequires:	libgsasl-devel
 BuildRequires:	tinyxml-devel
 BuildRequires:	libircclient-static-devel
+BuildRequires:	libgcrypt-devel
 
 %description
 PokerTH is a multi-platform poker game.
