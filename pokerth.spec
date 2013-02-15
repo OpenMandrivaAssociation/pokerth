@@ -1,3 +1,6 @@
+%define _enable_debug_packages %{nil}
+%define debug_package          %{nil}
+
 Name:		pokerth
 Summary:		PokerTH - play Texas Holdem Poker alone or online
 Version:		1.0
