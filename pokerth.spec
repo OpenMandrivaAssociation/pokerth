@@ -20,6 +20,7 @@ BuildRequires:	pkgconfig(libgsasl)
 BuildRequires:	tinyxml-devel
 BuildRequires:	libircclient-static-devel
 BuildRequires:	libgcrypt-devel
+BuildRequires:	pkgconfig(protobuf)
 
 %description
 PokerTH is a multi-platform poker game.
