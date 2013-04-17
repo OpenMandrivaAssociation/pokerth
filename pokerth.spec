@@ -1,29 +1,23 @@
-%define _enable_debug_packages %{nil}
-%define debug_package          %{nil}
-
 Name:		pokerth
-Summary:		PokerTH - play Texas Holdem Poker alone or online
-Version:		1.0
-Release:		2
-License:		GPLv2+
+Summary:	PokerTH - play Texas Holdem Poker alone or online
+Version:	1.0.1
+Release:	1
+License:	GPLv2+
 Group:		Games/Cards
 URL:		http://www.pokerth.net/
-Source0:		http://downloads.sourceforge.net/pokerth/PokerTH-%{version}-src.tar.bz2
-Patch0:		PokerTH-0.9.1-libircclient-dir.patch
+Source0:	http://downloads.sourceforge.net/pokerth/PokerTH-%{version}-src.tar.bz2
+Patch0:		PokerTH-1.0.1-libircclient-dir.patch
 Patch1:		PokerTH-0.9.1-link.patch
-Requires(post):	desktop-file-utils
-Requires(postun): desktop-file-utils
 BuildRequires:	qt4-devel
 BuildRequires:	gnutls-devel
-# Boost version in 2010.2 is too old so no backport to 2010.2
 BuildRequires:	boost-devel
-BuildRequires:	pkgconfig(libcurl)
-BuildRequires:	pkgconfig(SDL_mixer)
-BuildRequires:	pkgconfig(libgsasl)
 BuildRequires:	tinyxml-devel
 BuildRequires:	libircclient-static-devel
 BuildRequires:	libgcrypt-devel
+BuildRequires:	pkgconfig(libcurl)
+BuildRequires:	pkgconfig(libgsasl)
 BuildRequires:	pkgconfig(protobuf)
+BuildRequires:	pkgconfig(SDL_mixer)
 
 %description
 PokerTH is a multi-platform poker game.
@@ -39,11 +33,11 @@ PokerTH server.
 
 %prep
 %setup -q -n PokerTH-%{version}-src
-%patch0 -p0
+%patch0 -p1
 %patch1 -p0
 
 %build
-%qmake_qt4 pokerth.pro 
+%qmake_qt4 pokerth.pro QMAKE_CXXFLAGS_RELEASE= 
 %make
 
 %install
@@ -76,5 +70,4 @@ install -m 644 %{name}.desktop %{buildroot}%{_datadir}/applications/
 %files server
 %doc ChangeLog COPYING docs/server_setup_howto.txt
 %attr(0755,root,root) %{_bindir}/%{name}_server
-
 
