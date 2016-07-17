@@ -1,3 +1,5 @@
+%define _disable_lto 1
+
 Name:		pokerth
 Summary:	PokerTH - play Texas Holdem Poker alone or online
 Version:	1.1.1
@@ -8,6 +10,10 @@ URL:		http://www.pokerth.net/
 Source0:	http://downloads.sourceforge.net/pokerth/PokerTH-%{version}-src.tar.bz2
 Patch0:		PokerTH-1.0.1-libircclient-dir.patch
 Patch1:		PokerTH-0.9.1-link.patch
+Patch2:		pokerth-1.1.1-fstream-ambiguity.patch
+Patch3:		pokerth-1.1.1-ownerless.patch
+Patch4:		pokerth-1.1.1-cxx11-build.patch
+Patch5:		pokerth-1.1.1-cxx11-fixes.patch
 BuildRequires:	qt4-devel
 BuildRequires:	gnutls-devel
 BuildRequires:	boost-devel
@@ -33,12 +39,11 @@ PokerTH server.
 
 %prep
 %setup -q -n PokerTH-%{version}-src
-%patch0 -p1
-%patch1 -p0
+%apply_patches
 
 %build
 %qmake_qt4 pokerth.pro QMAKE_CXXFLAGS_RELEASE= 
-%make
+%make CC=gcc CXX=g++
 
 %install
 #data
