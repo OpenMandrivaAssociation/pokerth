@@ -3,7 +3,7 @@
 Name:		pokerth
 Summary:	PokerTH - play Texas Holdem Poker alone or online
 Version:	1.1.1
-Release:	4
+Release:	5
 License:	GPLv2+
 Group:		Games/Cards
 URL:		http://www.pokerth.net/
