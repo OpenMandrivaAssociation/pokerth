@@ -2,12 +2,12 @@
 
 Name:		pokerth
 Summary:	PokerTH - play Texas Holdem Poker alone or online
-Version:	1.1.1
-Release:	5
+Version:	1.1.2
+Release:	1
 License:	GPLv2+
 Group:		Games/Cards
 URL:		http://www.pokerth.net/
-Source0:	http://downloads.sourceforge.net/pokerth/PokerTH-%{version}-src.tar.bz2
+Source0:	http://downloads.sourceforge.net/pokerth/%{name}-%{version}.tar.gz
 Patch0:		PokerTH-1.0.1-libircclient-dir.patch
 Patch1:		PokerTH-0.9.1-link.patch
 Patch2:		pokerth-1.1.1-fstream-ambiguity.patch
@@ -75,4 +75,3 @@ install -m 644 %{name}.desktop %{buildroot}%{_datadir}/applications/
 %files server
 %doc ChangeLog COPYING docs/server_setup_howto.txt
 %attr(0755,root,root) %{_bindir}/%{name}_server
-
