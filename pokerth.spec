@@ -39,7 +39,7 @@ PokerTH server.
 
 %prep
 %setup -q -n PokerTH-%{version}-src
-%apply_patches
+%autopatch -p1
 
 %build
 %qmake_qt4 pokerth.pro QMAKE_CXXFLAGS_RELEASE= 
