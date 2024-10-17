@@ -6,7 +6,7 @@ Version:	1.1.1
 Release:	5
 License:	GPLv2+
 Group:		Games/Cards
-URL:		http://www.pokerth.net/
+URL:		https://www.pokerth.net/
 Source0:	http://downloads.sourceforge.net/pokerth/PokerTH-%{version}-src.tar.bz2
 Patch0:		PokerTH-1.0.1-libircclient-dir.patch
 Patch1:		PokerTH-0.9.1-link.patch
