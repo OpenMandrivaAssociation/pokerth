@@ -14,6 +14,7 @@ Patch2:		pokerth-1.1.1-fstream-ambiguity.patch
 Patch3:		pokerth-1.1.1-ownerless.patch
 Patch4:		pokerth-1.1.1-cxx11-build.patch
 Patch5:		pokerth-1.1.1-cxx11-fixes.patch
+BuildRequires:	make
 BuildRequires:	qt4-devel
 BuildRequires:	gnutls-devel
 BuildRequires:	boost-devel
